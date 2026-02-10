@@ -16,9 +16,15 @@ concurrency:
 jobs:
   codex-review:
     runs-on: ubuntu-latest
-    outputs:
-      final_message: ${{ steps.run_codex.outputs.final-message }}
     steps:
+      - name: Verify OPENAI_API_KEY is available (safe)
+        run: |
+          if [ -z "${{ secrets.OPENAI_API_KEY }}" ]; then
+            echo "OPENAI_API_KEY secret is NOT available to this workflow."
+            exit 1
+          fi
+          echo "OPENAI_API_KEY secret is available."
+
       - name: Checkout PR merge commit
         uses: actions/checkout@v4
         with:
@@ -31,49 +37,65 @@ jobs:
             ${{ github.event.pull_request.base.ref }} \
             +refs/pull/${{ github.event.pull_request.number }}/head
 
-      - name: Run Codex review
-        id: run_codex
-        uses: openai/codex-action@v1
+      - name: Generate diff for review
+        run: |
+          git diff origin/${{ github.event.pull_request.base.ref }}...HEAD > /tmp/pr-diff.txt
+          echo "Diff size: $(wc -l < /tmp/pr-diff.txt) lines"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
-          prompt: |
-            You are reviewing a pull request for an Astro + Vue + Tailwind CSS blog site.
-            The tech stack is: Astro 5, Vue 3, TypeScript, Tailwind CSS 4.
+          node-version: '20'
 
-            Review the diff between the base branch (${{ github.event.pull_request.base.ref }})
-            and the PR head for the following:
+      - name: Install Codex CLI
+        run: npm install -g @openai/codex
 
-            1. **Bugs & Logic Errors** — Identify any incorrect logic, off-by-one errors, null/undefined risks, or broken functionality.
-            2. **Security** — Flag XSS risks in templates, unsafe data handling, exposed secrets, or dependency vulnerabilities.
-            3. **Performance** — Identify unnecessary re-renders, unoptimized images, missing lazy loading, or large bundle impacts.
-            4. **TypeScript** — Check for missing types, unsafe `any` usage, or incorrect type assertions.
-            5. **Astro & Vue Best Practices** — Verify correct component patterns, proper use of frontmatter vs client-side code, and content collection usage.
-            6. **Code Quality** — Note dead code, unclear naming, missing error handling, or overly complex logic.
+      - name: Run Codex review
+        env:
+          CODEX_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          codex exec \
+            --full-auto \
+            --skip-git-repo-check \
+            -o /tmp/review-output.md \
+            "You are reviewing a pull request for an Astro + Vue + Tailwind CSS blog site.
+          The tech stack is: Astro 5, Vue 3, TypeScript, Tailwind CSS 4.
 
-            Format your review as a structured markdown report with sections for each category.
-            Only include sections where you found issues. If everything looks good in a category, omit it.
-            Start with a brief summary of the PR changes and an overall assessment.
-            Be constructive and specific — reference file names and line numbers where possible.
+          The PR diff is in /tmp/pr-diff.txt. Read that file and review the changes for:
 
-  post-review:
-    needs: codex-review
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-    steps:
+          1. **Bugs & Logic Errors** — Incorrect logic, off-by-one errors, null/undefined risks, broken functionality.
+          2. **Security** — XSS risks in templates, unsafe data handling, exposed secrets, dependency vulnerabilities.
+          3. **Performance** — Unnecessary re-renders, unoptimized images, missing lazy loading, large bundle impacts.
+          4. **TypeScript** — Missing types, unsafe any usage, incorrect type assertions.
+          5. **Astro & Vue Best Practices** — Component patterns, frontmatter vs client-side code, content collection usage.
+          6. **Code Quality** — Dead code, unclear naming, missing error handling, overly complex logic.
+
+          Format your review as a structured markdown report with sections for each category.
+          Only include sections where you found issues. If everything looks good in a category, omit it.
+          Start with a brief summary of the PR changes and an overall assessment.
+          Be constructive and specific — reference file names and line numbers where possible."
+
       - name: Post review comment on PR
         uses: actions/github-script@v7
         with:
           script: |
-            const message = process.env.CODEX_OUTPUT;
+            const fs = require('fs');
+            const outputPath = '/tmp/review-output.md';
 
-            if (!message || message.trim() === '') {
-              console.log('No review output from Codex, skipping comment.');
+            if (!fs.existsSync(outputPath)) {
+              console.log('No review output file found, skipping comment.');
+              return;
+            }
+
+            const message = fs.readFileSync(outputPath, 'utf8').trim();
+
+            if (!message) {
+              console.log('Review output is empty, skipping comment.');
               return;
             }
 
             const header = '## 🤖 Codex Code Review\n\n';
-            const footer = '\n\n---\n*Automated review by [OpenAI Codex](https://github.com/openai/codex-action) · triggered on PR to `development`*';
+            const footer = '\n\n---\n*Automated review by [OpenAI Codex CLI](https://github.com/openai/codex) · triggered on PR to `development`*';
             const body = header + message + footer;
 
             // Check for an existing Codex review comment to update instead of duplicating
@@ -105,5 +127,3 @@ jobs:
               });
               console.log('Posted new review comment');
             }
-        env:
-          CODEX_OUTPUT: ${{ needs.codex-review.outputs.final_message }}
