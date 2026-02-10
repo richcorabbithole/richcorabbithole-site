@@ -1,4 +1,4 @@
-Rich Corabbithole Blog - Claude Code Project Guide
+richcorabbithole Blog - Claude Code Project Guide
 
 Quick Start:
 This is a blog about hyperfixations, built with Astro + GitHub Pages for the site, AWS Lambda + Anthropic API for AI agents that help create content.
