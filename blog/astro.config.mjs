@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://richcompton1705.github.io',
+  site: 'https://richcorabbithole.com',
   base: '/richcorabbithole-site',
   integrations: [vue()],
 
