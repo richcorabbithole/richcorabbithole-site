@@ -9,7 +9,7 @@ interface Props {
 const { post } = Astro.props;
 ---
 
-<a href={`${import.meta.env.BASE_URL}/blog/${post.slug}`} class="block group">
+<a href={`/blog/${post.slug}`} class="block group">
   <article class="border border-vault-raised bg-vault-mid p-6 h-full
                   hover:border-amber-dim hover:glow-amber
                   transition-all duration-300 relative">
