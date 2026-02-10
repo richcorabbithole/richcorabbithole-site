@@ -1,0 +1,33 @@
+---
+interface Props {
+  depth: number;
+}
+
+const { depth } = Astro.props;
+
+const depthLabels = ['Surface', 'Shallow', 'Medium', 'Deep', 'Abyssal'];
+const label = depthLabels[depth - 1] || 'Unknown';
+const levels = [1, 2, 3, 4, 5];
+---
+
+<div
+  class="flex items-center gap-2"
+  title={`Research Depth: ${depth}/5 (${label})`}
+>
+  <span class="text-xs text-faded tracking-wider font-mono">
+    DEPTH
+  </span>
+  <div class="flex gap-0.5">
+    {levels.map((level) => (
+      <span
+        class:list={[
+          'w-2 h-3 inline-block',
+          level <= depth
+            ? 'bg-amber'
+            : 'bg-vault-raised',
+        ]}
+      />
+    ))}
+  </div>
+  <span class="text-xs text-dust font-mono">{label}</span>
+</div>

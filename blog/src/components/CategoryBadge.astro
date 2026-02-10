@@ -1,0 +1,25 @@
+---
+interface Props {
+  category: 'tech' | 'science' | 'history' | 'gaming' | 'maker' | 'other';
+}
+
+const { category } = Astro.props;
+
+const categoryConfig: Record<string, { label: string; color: string }> = {
+  tech:    { label: 'TECH',    color: 'var(--color-cat-tech)' },
+  science: { label: 'SCIENCE', color: 'var(--color-cat-science)' },
+  history: { label: 'HISTORY', color: 'var(--color-cat-history)' },
+  gaming:  { label: 'GAMING',  color: 'var(--color-cat-gaming)' },
+  maker:   { label: 'MAKER',   color: 'var(--color-cat-maker)' },
+  other:   { label: 'OTHER',   color: 'var(--color-cat-other)' },
+};
+
+const config = categoryConfig[category];
+---
+
+<span
+  class="inline-flex items-center gap-1.5 text-xs tracking-widest font-mono font-semibold border px-2 py-0.5"
+  style={`color: ${config.color}; border-color: ${config.color}`}
+>
+  {config.label}
+</span>
