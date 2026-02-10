@@ -1,1 +1,251 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* ============================================
+   THEME TOKENS — Retro-Future Curiosities
+   Art Deco x Atomic Age x Pip-Boy amber
+   ============================================ */
+@theme {
+  /* Surface colors — weathered vault walls & dark industrial */
+  --color-vault-black: #111110;
+  --color-vault-dark: #1b1a17;
+  --color-vault-mid: #24231f;
+  --color-vault-panel: #2e2d28;
+  --color-vault-raised: #3a3833;
+
+  /* Amber/Pip-Boy accents */
+  --color-amber: #d4a843;
+  --color-amber-light: #e8c46a;
+  --color-amber-dim: #8c7230;
+  --color-amber-glow: #d4a84333;
+
+  /* Text hierarchy */
+  --color-ivory: #ede5d5;
+  --color-cream: #d6ccb8;
+  --color-dust: #a89e8a;
+  --color-faded: #7a7264;
+
+  /* Hyperfixation category colors — muted, irradiated */
+  --color-cat-tech: #5a9a8a;
+  --color-cat-science: #8a7aaa;
+  --color-cat-history: #aa8a5a;
+  --color-cat-gaming: #5a8a6a;
+  --color-cat-maker: #aa5a5a;
+  --color-cat-other: #7a7a7a;
+
+  /* Supporting */
+  --color-rust: #6b3a2a;
+  --color-terminal-bg: #1a1f1a;
+
+  /* Typography */
+  --font-heading: "Playfair Display", "Georgia", serif;
+  --font-body: "Source Serif 4", "Georgia", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+@layer base {
+  html {
+    background-color: var(--color-vault-dark);
+    color: var(--color-cream);
+    font-family: var(--font-body);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    /* Subtle film grain / noise texture */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+
+  ::selection {
+    background-color: var(--color-amber);
+    color: var(--color-vault-black);
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-vault-black);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-amber-dim);
+    border-radius: 0;
+  }
+}
+
+/* ============================================
+   PROSE OVERRIDES — Wasteland Terminal Typography
+   ============================================ */
+@layer components {
+  .prose {
+    --tw-prose-body: var(--color-cream);
+    --tw-prose-headings: var(--color-ivory);
+    --tw-prose-links: var(--color-amber);
+    --tw-prose-bold: var(--color-ivory);
+    --tw-prose-counters: var(--color-amber-dim);
+    --tw-prose-bullets: var(--color-amber-dim);
+    --tw-prose-hr: var(--color-amber-dim);
+    --tw-prose-quotes: var(--color-dust);
+    --tw-prose-quote-borders: var(--color-amber);
+    --tw-prose-captions: var(--color-dust);
+    --tw-prose-code: var(--color-amber-light);
+    --tw-prose-pre-code: var(--color-cream);
+    --tw-prose-pre-bg: var(--color-terminal-bg);
+    --tw-prose-th-borders: var(--color-amber-dim);
+    --tw-prose-td-borders: var(--color-vault-panel);
+  }
+
+  .prose :where(h1, h2, h3, h4):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    font-family: var(--font-heading);
+    letter-spacing: 0.02em;
+  }
+
+  .prose :where(h2):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-vault-raised);
+  }
+
+  .prose :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    text-decoration-color: var(--color-amber-dim);
+    text-underline-offset: 3px;
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+  }
+  .prose :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)):hover {
+    color: var(--color-amber-light);
+    text-decoration-color: var(--color-amber-light);
+  }
+
+  .prose :where(blockquote):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    border-left-width: 3px;
+    border-left-color: var(--color-amber-dim);
+    font-style: italic;
+    background-color: var(--color-vault-mid);
+    padding: 1rem 1.5rem;
+  }
+
+  .prose :where(code):not(:where(pre *, [class~="not-prose"], [class~="not-prose"] *)) {
+    background-color: var(--color-vault-panel);
+    padding: 0.15em 0.4em;
+    border-radius: 0;
+    font-size: 0.875em;
+    font-family: var(--font-mono);
+    border: 1px solid var(--color-vault-raised);
+  }
+
+  .prose :where(pre):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    border: 1px solid var(--color-vault-raised);
+    border-radius: 0;
+    font-family: var(--font-mono);
+  }
+
+  .prose :where(ul > li)::marker {
+    color: var(--color-amber);
+  }
+  .prose :where(ol > li)::marker {
+    color: var(--color-amber);
+    font-family: var(--font-mono);
+  }
+
+  .prose :where(strong):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    color: var(--color-ivory);
+  }
+
+  .prose :where(hr):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    border: none;
+    height: 1px;
+    background-color: var(--color-vault-raised);
+  }
+}
+
+/* ============================================
+   PROSE COLOR OVERRIDES — Force dark theme
+   The typography plugin defaults can override
+   CSS variables in v4, so we enforce colors
+   directly on elements as a fallback.
+   ============================================ */
+.prose {
+  color: var(--color-cream);
+}
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+  color: var(--color-ivory);
+}
+.prose strong, .prose b {
+  color: var(--color-ivory);
+}
+.prose a {
+  color: var(--color-amber);
+}
+.prose p, .prose li, .prose td, .prose th {
+  color: var(--color-cream);
+}
+.prose blockquote {
+  color: var(--color-dust);
+}
+.prose figcaption {
+  color: var(--color-dust);
+}
+
+/* ============================================
+   DECORATIVE UTILITIES — Industrial / Vault-Tec
+   ============================================ */
+@layer components {
+  /* Simple ruled line — like a form divider */
+  .rule-line {
+    height: 1px;
+    background-color: var(--color-vault-raised);
+  }
+
+  /* Amber accent line */
+  .rule-amber {
+    height: 1px;
+    background-color: var(--color-amber-dim);
+  }
+
+  /* Thicker industrial border — like stamped metal */
+  .rule-heavy {
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      var(--color-amber-dim) 0%,
+      var(--color-amber) 50%,
+      var(--color-amber-dim) 100%
+    );
+  }
+
+  /* Corner brackets — simplified, more industrial */
+  .bracket-corners {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .bracket-corners::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 16px;
+    height: 16px;
+    border-top: 2px solid var(--color-amber-dim);
+    border-left: 2px solid var(--color-amber-dim);
+  }
+  .bracket-corners::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 16px;
+    height: 16px;
+    border-bottom: 2px solid var(--color-amber-dim);
+    border-right: 2px solid var(--color-amber-dim);
+  }
+
+  /* Pip-Boy style subtle glow on cards */
+  .glow-amber {
+    box-shadow: 0 0 20px -5px var(--color-amber-glow);
+  }
+}

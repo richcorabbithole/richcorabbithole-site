@@ -1,0 +1,48 @@
+---
+import CategoryBadge from './CategoryBadge.astro';
+import DepthMeter from './DepthMeter.astro';
+
+interface Props {
+  post: any;
+}
+
+const { post } = Astro.props;
+---
+
+<a href={`${import.meta.env.BASE_URL}/blog/${post.slug}`} class="block group">
+  <article class="border border-vault-raised bg-vault-mid p-6 h-full
+                  hover:border-amber-dim hover:glow-amber
+                  transition-all duration-300 relative">
+
+    <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+      <CategoryBadge category={post.data.hyperfixation} />
+      <DepthMeter depth={post.data.researchDepth} />
+    </div>
+
+    <h3 class="font-heading text-xl font-bold text-ivory mb-2
+              group-hover:text-amber transition-colors duration-200">
+      {post.data.title}
+    </h3>
+
+    <p class="text-cream text-sm mb-4 leading-relaxed line-clamp-3">
+      {post.data.description}
+    </p>
+
+    <div class="mt-auto">
+      <div class="flex gap-2 flex-wrap mb-3">
+        {post.data.tags.slice(0, 3).map((tag: string) => (
+          <span class="text-xs text-faded font-mono
+                       px-2 py-0.5 bg-vault-panel">
+            {tag}
+          </span>
+        ))}
+      </div>
+
+      <time class="text-xs text-faded font-mono">
+        {post.data.publishDate.toLocaleDateString('en-US', {
+          year: 'numeric', month: 'short', day: 'numeric'
+        })}
+      </time>
+    </div>
+  </article>
+</a>
