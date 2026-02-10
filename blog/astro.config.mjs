@@ -7,7 +7,6 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://richcorabbithole.com',
-  base: '/richcorabbithole-site',
   integrations: [vue()],
 
   vite: {
