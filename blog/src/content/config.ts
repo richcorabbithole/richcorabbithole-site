@@ -5,7 +5,7 @@ const blogCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    publishDate: z.date(),
+    publishDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
     hyperfixation: z.enum(['tech', 'science', 'history', 'gaming', 'maker', 'other']),
     researchDepth: z.number().min(1).max(5),
     tags: z.array(z.string()),
