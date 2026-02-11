@@ -1,7 +1,7 @@
 ---
 title: "The Rabbit Hole of Mechanical Keyboards"
 description: "What started as needing a new keyboard turned into a deep dive into switches, keycaps, PCBs, and the endless pursuit of the perfect 'thock'."
-publishDate: 2026-02-10
+publishDate: "2026-02-10"
 hyperfixation: "maker"
 researchDepth: 4
 tags: ["mechanical keyboards", "hardware", "maker", "switches"]

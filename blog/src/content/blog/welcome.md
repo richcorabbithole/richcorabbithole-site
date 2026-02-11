@@ -1,7 +1,7 @@
 ---
 title: "Welcome to richcorabbithole"
 description: "The first post on this blog about hyperfixations - exploring tech, science, history, gaming, and maker projects with deep dives into topics that capture my attention."
-publishDate: 2026-02-09
+publishDate: "2026-02-09"
 hyperfixation: "tech"
 researchDepth: 3
 tags: ["introduction", "meta", "blogging"]

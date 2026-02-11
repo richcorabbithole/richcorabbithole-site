@@ -1,7 +1,7 @@
 ---
 title: "The Voyager Golden Record: A Mixtape for the Cosmos"
 description: "In 1977, NASA launched two spacecraft carrying gold-plated records with sounds and images of Earth. The story of what made the cut is fascinating."
-publishDate: 2026-02-10
+publishDate: "2026-02-10"
 hyperfixation: "science"
 researchDepth: 3
 tags: ["space", "nasa", "voyager", "history of science"]
