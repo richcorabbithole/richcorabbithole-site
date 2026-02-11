@@ -72,9 +72,15 @@ Create a new markdown file in `blog/src/content/blog/` with the following frontm
 ---
 title: "Post Title"
 description: "Brief description"
-pubDate: 2026-02-09
-author: "Author Name"
+publishDate: "2026-02-09"
+hyperfixation: "tech" # one of: tech, science, history, gaming, maker, other
+researchDepth: 3 # 1-5
 tags: ["tag1", "tag2"]
+draft: false # optional
+featured: false # optional
+coverImage: "/images/example.jpg" # optional
+sources: # optional
+  - ["https://example.com/reference"]
 ---
 ```
 
