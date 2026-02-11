@@ -80,7 +80,8 @@ draft: false # optional
 featured: false # optional
 coverImage: "/images/example.jpg" # optional
 sources: # optional
-  - ["https://example.com/reference"]
+  - "https://example.com/reference1"
+  - "https://example.com/reference2"
 ---
 ```
 
