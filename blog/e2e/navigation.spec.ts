@@ -5,6 +5,7 @@ test.describe('Navigation', () => {
     await page.goto('/');
     const firstPostLink = page.locator('a[href*="/blog/"]').first();
     const href = await firstPostLink.getAttribute('href');
+    expect(href).toBeTruthy();
     await firstPostLink.click();
     await page.waitForURL(`**${href}`);
     await expect(page.locator('article')).toBeVisible();

@@ -1,8 +1,8 @@
 ---
-import { categoryConfig } from '../lib/categoryConfig';
+import { categoryConfig, type Category } from '../lib/categoryConfig';
 
 interface Props {
-  category: 'tech' | 'science' | 'history' | 'gaming' | 'maker' | 'other';
+  category: Category;
 }
 
 const { category } = Astro.props;
