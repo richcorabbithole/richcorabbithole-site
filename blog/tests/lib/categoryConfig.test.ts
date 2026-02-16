@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { categoryConfig, type Category } from './categoryConfig';
+import { categoryConfig, type Category } from '../../src/lib/categoryConfig';
 
 describe('categoryConfig', () => {
   const expectedCategories: Category[] = ['tech', 'science', 'history', 'gaming', 'maker', 'other'];
