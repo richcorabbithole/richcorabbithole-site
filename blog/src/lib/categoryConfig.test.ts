@@ -1,15 +1,15 @@
 import { describe, it, expect } from 'vitest';
-import { categoryConfig } from './categoryConfig';
+import { categoryConfig, type Category } from './categoryConfig';
 
 describe('categoryConfig', () => {
-  const expectedCategories = ['tech', 'science', 'history', 'gaming', 'maker', 'other'];
+  const expectedCategories: Category[] = ['tech', 'science', 'history', 'gaming', 'maker', 'other'];
 
   it('has all six categories', () => {
     expect(Object.keys(categoryConfig)).toEqual(expectedCategories);
   });
 
   it.each(expectedCategories)('"%s" has a label and color', (category) => {
-    const config = categoryConfig[category];
+    const config = categoryConfig[category as Category];
     expect(config).toBeDefined();
     expect(config.label).toBeTruthy();
     expect(config.color).toBeTruthy();
