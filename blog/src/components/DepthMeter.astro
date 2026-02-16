@@ -1,12 +1,13 @@
 ---
+import { getDepthLabel } from '../lib/depthLabels';
+
 interface Props {
   depth: number;
 }
 
 const { depth } = Astro.props;
 
-const depthLabels = ['Surface', 'Shallow', 'Medium', 'Deep', 'Abyssal'];
-const label = depthLabels[depth - 1] || 'Unknown';
+const label = getDepthLabel(depth);
 const levels = [1, 2, 3, 4, 5];
 ---
 
