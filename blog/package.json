@@ -6,7 +6,10 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@astrojs/vue": "^5.1.4",
@@ -17,7 +20,9 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.6",
+    "@playwright/test": "^1.58.2",
     "@tailwindcss/typography": "^0.5.19",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
   }
 }
