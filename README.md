@@ -12,6 +12,7 @@ Personal blog site for richcorabbithole.com built with Astro and Tailwind CSS.
 - **Styling**: Tailwind CSS v4.1.18
 - **Interactive Components**: Vue v3.5.28
 - **Build Tool**: Vite
+- **Testing**: Vitest (unit) + Playwright (e2e)
 - **Hosting**: GitHub Pages
 - **CI/CD**: GitHub Actions
 
@@ -41,6 +42,9 @@ The site runs at `http://localhost:4321/richcorabbithole-site`
 - `npm run build` - Build for production
 - `npm run preview` - Preview production build locally
 - `npm run astro` - Run Astro CLI commands
+- `npm test` - Run unit tests (Vitest)
+- `npm run test:watch` - Run unit tests in watch mode
+- `npm run test:e2e` - Build and run end-to-end tests (Playwright)
 
 ## Project Structure
 
@@ -56,9 +60,14 @@ richcorabbithole-site/
 │   │   │   └── config.ts      # Content collection type definitions
 │   │   ├── components/        # Astro and Vue components
 │   │   ├── layouts/           # Page layout templates
+│   │   ├── lib/               # Shared utility functions
 │   │   ├── pages/             # Route pages
 │   │   └── styles/            # Global CSS
+│   ├── tests/
+│   │   └── lib/               # Unit tests (Vitest)
+│   ├── e2e/                   # End-to-end tests (Playwright)
 │   ├── astro.config.mjs       # Astro configuration
+│   ├── vitest.config.ts       # Vitest configuration
 │   └── package.json           # Dependencies and scripts
 ├── LICENSE
 └── README.md
