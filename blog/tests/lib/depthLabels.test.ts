@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { getDepthLabel, depthLabels } from './depthLabels';
+import { getDepthLabel, depthLabels } from '../../src/lib/depthLabels';
 
 describe('getDepthLabel', () => {
   it('returns Surface for depth 1', () => {

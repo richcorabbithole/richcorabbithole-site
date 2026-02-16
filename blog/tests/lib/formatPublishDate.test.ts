@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { formatPublishDate } from './formatPublishDate';
+import { formatPublishDate } from '../../src/lib/formatPublishDate';
 
 describe('formatPublishDate', () => {
   it('formats a valid YYYY-MM-DD date', () => {
