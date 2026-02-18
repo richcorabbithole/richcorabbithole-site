@@ -2,9 +2,9 @@ import { describe, it, expect } from 'vitest';
 import { categoryConfig, type Category } from '../../src/lib/categoryConfig';
 
 describe('categoryConfig', () => {
-  const expectedCategories: Category[] = ['tech', 'science', 'history', 'gaming', 'maker', 'other'];
+  const expectedCategories: Category[] = ['tech', 'science', 'history', 'gaming', 'maker', 'pop-culture', 'other'];
 
-  it('has all six categories', () => {
+  it('has all seven categories', () => {
     expect(Object.keys(categoryConfig)).toEqual(expectedCategories);
   });
 
@@ -15,15 +15,15 @@ describe('categoryConfig', () => {
     expect(config.color).toBeTruthy();
   });
 
-  it('labels are uppercase versions of category keys', () => {
+  it('labels are uppercase slugs (hyphens become spaces for multi-word categories)', () => {
     for (const [key, value] of Object.entries(categoryConfig)) {
-      expect(value.label).toBe(key.toUpperCase());
+      expect(value.label).toBe(key.toUpperCase().replace(/-/g, ' '));
     }
   });
 
   it('colors reference CSS custom properties', () => {
     for (const value of Object.values(categoryConfig)) {
-      expect(value.color).toMatch(/^var\(--color-cat-\w+\)$/);
+      expect(value.color).toMatch(/^var\(--color-cat-[\w-]+\)$/);
     }
   });
 });

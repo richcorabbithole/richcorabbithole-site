@@ -34,7 +34,7 @@ test.describe('Homepage', () => {
     const count = await articles.count();
     for (let i = 0; i < count; i++) {
       const badge = articles.nth(i).locator('span', {
-        hasText: /^\s*(TECH|SCIENCE|HISTORY|GAMING|MAKER|OTHER)\s*$/
+        hasText: /^\s*(TECH|SCIENCE|HISTORY|GAMING|MAKER|POP CULTURE|OTHER)\s*$/
       });
       await expect(badge).toBeVisible();
     }
