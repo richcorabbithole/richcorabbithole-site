@@ -1,6 +1,6 @@
 ---
 title: "Welcome to richcorabbithole"
-description: "The first post on this blog about hyperfixations - exploring tech, science, history, gaming, and maker projects with deep dives into topics that capture my attention."
+description: "An automated blog pipeline where AI-powered Lambda workers research, write, edit, and publish posts as GitHub PRs. Every post is vetted by me before it goes live."
 publishDate: "2026-02-09"
 hyperfixation: "tech"
 researchDepth: 3
@@ -10,31 +10,35 @@ featured: true
 
 # Welcome to the Rabbit Hole
 
-This is the beginning of something interesting. **richcorabbithole** is a blog dedicated to exploring the things that capture my attention - those deep dives into topics that keep you up at night, reading just one more article, watching just one more video.
+**richcorabbithole** is a blog about hyperfixations — the topics that pull you in and won't let go. It's also a pipeline experiment.
 
-## What to Expect
+Every post here was written by AI-powered Lambda workers: one researches, one writes, one edits, one optimizes for SEO, and one opens a GitHub PR. Codex reviews the code. I read every post before it goes live. The bar is my curiosity.
 
-This blog will cover a wide range of topics across different categories:
+## What Gets Covered
 
-- **Tech**: Programming languages, frameworks, tools, and technologies
-- **Science**: Fascinating discoveries and explanations of how things work
-- **History**: Historical events, figures, and forgotten stories
-- **Gaming**: Game design, mechanics, and the culture around games
-- **Maker**: DIY projects, electronics, and building things
-- **Other**: Everything else that doesn't fit neatly into a category
+Six categories, no filler:
 
-## The Format
+- **Tech** — programming, tools, AI, and the internet
+- **Science** — biology, physics, astronomy, and how things actually work
+- **History** — events, figures, and the parts textbooks left out
+- **Gaming** — game design, mechanics, and the culture around them
+- **Pop Culture** — fictional characters, franchises, comics, film, and music
+- **Maker** — DIY, electronics, hardware, and building things with your hands
 
-Each post will have a "research depth" rating from 1-5, indicating how deep the dive goes:
+If a topic doesn't fit, it gets its own category.
 
-1. **Surface** - Quick overview or introduction
-2. **Shallow** - Basic exploration with some details
-3. **Medium** - Solid dive with good coverage
-4. **Deep** - Thorough investigation with nuanced understanding
-5. **Abyssal** - Exhaustive exploration leaving no stone unturned
+## How Deep Does It Go?
 
-## Built with AI Assistance
+Each post has a research depth rating from 1 to 5:
 
-This blog is powered by an AI agent system that helps with research, writing, editing, and SEO. But the human touch - the curation, the direction, the personality - that's what makes it special.
+1. **Surface** — quick overview
+2. **Shallow** — basic exploration
+3. **Medium** — solid coverage
+4. **Deep** — thorough investigation
+5. **Abyssal** — no stone unturned
 
-Let's dive in! 🐰🕳️
+## The Pipeline
+
+A topic goes in. Five Lambda workers pass it through research, writing, editing, and SEO. A PR lands in GitHub. I read it. If it scratches the itch, it ships.
+
+For the full technical breakdown, see [the project page](/project/).
