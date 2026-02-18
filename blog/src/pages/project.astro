@@ -1,0 +1,295 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import CategoryBadge from '../components/CategoryBadge.astro';
+import DecoSection from '../components/DecoSection.astro';
+
+const basePath = import.meta.env.BASE_URL.replace(/\/+$/, '/');
+
+const allPosts = await getCollection('blog', ({ data }) => data.draft !== true);
+const recentPosts = allPosts
+  .sort((a, b) => b.data.publishDate.localeCompare(a.data.publishDate))
+  .slice(0, 4);
+---
+
+<Layout title="Project — richcorabbithole" description="How richcorabbithole works: an automated blog pipeline powered by Claude, AWS Lambda, and GitHub.">
+
+  <div class="max-w-5xl mx-auto px-6 py-16">
+
+    <!-- Title -->
+    <div class="mb-16 text-center">
+      <h2 class="font-heading text-4xl md:text-5xl font-bold text-ivory mb-4 tracking-wide">
+        The Project
+      </h2>
+      <div class="rule-amber mb-6 max-w-xs mx-auto"></div>
+      <p class="text-cream text-lg leading-relaxed max-w-2xl mx-auto">
+        An automated blog pipeline where a topic submission triggers a chain of
+        AI-powered Lambda workers that research, write, edit, optimize, and
+        publish a post as a GitHub PR — fully hands-off. Every post on this site
+        was written by the pipeline. I read every one. The bar is my curiosity.
+      </p>
+    </div>
+
+    <!-- Pipeline Diagram -->
+    <section class="mb-16">
+      <DecoSection title="The Pipeline" />
+
+      <div class="border border-vault-raised bg-vault-mid p-6 overflow-x-auto">
+        <div class="min-w-max mx-auto">
+
+          <!-- Flow row -->
+          <div class="flex items-start gap-0">
+
+            <!-- Entry -->
+            <div class="flex flex-col items-center">
+              <div class="border border-amber-dim bg-vault-panel px-4 py-3 text-center min-w-[120px]">
+                <div class="text-xs text-faded font-mono uppercase tracking-wider mb-1">Entry</div>
+                <div class="font-mono text-sm text-ivory">CLI / API GW</div>
+              </div>
+              <div class="text-xs text-faded font-mono mt-2 text-center">SigV4 signed</div>
+            </div>
+
+            <div class="flex items-center pt-5 px-1">
+              <div class="h-px w-6 bg-amber-dim"></div>
+              <div class="text-amber-dim text-xs">▶</div>
+            </div>
+
+            <!-- Research -->
+            <div class="flex flex-col items-center">
+              <div class="border border-vault-raised bg-vault-panel px-4 py-3 text-center min-w-[120px]">
+                <div class="text-xs text-faded font-mono uppercase tracking-wider mb-1">Research</div>
+                <div class="font-mono text-sm text-ivory">ResearchWorker</div>
+              </div>
+              <div class="text-xs text-faded font-mono mt-2 text-center">SQS · S3 · Claude</div>
+            </div>
+
+            <div class="flex items-center pt-5 px-1">
+              <div class="h-px w-6 bg-amber-dim"></div>
+              <div class="text-amber-dim text-xs">▶</div>
+            </div>
+
+            <!-- Write -->
+            <div class="flex flex-col items-center">
+              <div class="border border-vault-raised bg-vault-panel px-4 py-3 text-center min-w-[120px]">
+                <div class="text-xs text-faded font-mono uppercase tracking-wider mb-1">Write</div>
+                <div class="font-mono text-sm text-ivory">WriteWorker</div>
+              </div>
+              <div class="text-xs text-faded font-mono mt-2 text-center">SQS · S3 · Claude</div>
+            </div>
+
+            <div class="flex items-center pt-5 px-1">
+              <div class="h-px w-6 bg-amber-dim"></div>
+              <div class="text-amber-dim text-xs">▶</div>
+            </div>
+
+            <!-- Edit -->
+            <div class="flex flex-col items-center">
+              <div class="border border-vault-raised bg-vault-panel px-4 py-3 text-center min-w-[120px]">
+                <div class="text-xs text-faded font-mono uppercase tracking-wider mb-1">Edit</div>
+                <div class="font-mono text-sm text-ivory">EditWorker</div>
+              </div>
+              <div class="text-xs text-faded font-mono mt-2 text-center">SQS · S3 · Claude</div>
+            </div>
+
+            <div class="flex items-center pt-5 px-1">
+              <div class="h-px w-6 bg-amber-dim"></div>
+              <div class="text-amber-dim text-xs">▶</div>
+            </div>
+
+            <!-- SEO -->
+            <div class="flex flex-col items-center">
+              <div class="border border-vault-raised bg-vault-panel px-4 py-3 text-center min-w-[120px]">
+                <div class="text-xs text-faded font-mono uppercase tracking-wider mb-1">SEO</div>
+                <div class="font-mono text-sm text-ivory">SEOWorker</div>
+              </div>
+              <div class="text-xs text-faded font-mono mt-2 text-center">SQS · S3 · Claude</div>
+            </div>
+
+            <div class="flex items-center pt-5 px-1">
+              <div class="h-px w-6 bg-amber-dim"></div>
+              <div class="text-amber-dim text-xs">▶</div>
+            </div>
+
+            <!-- Publish -->
+            <div class="flex flex-col items-center">
+              <div class="border border-vault-raised bg-vault-panel px-4 py-3 text-center min-w-[120px]">
+                <div class="text-xs text-faded font-mono uppercase tracking-wider mb-1">Publish</div>
+                <div class="font-mono text-sm text-ivory">PublishWorker</div>
+              </div>
+              <div class="text-xs text-faded font-mono mt-2 text-center">SQS · GitHub App</div>
+            </div>
+
+            <div class="flex items-center pt-5 px-1">
+              <div class="h-px w-6 bg-amber-dim"></div>
+              <div class="text-amber-dim text-xs">▶</div>
+            </div>
+
+            <!-- Output -->
+            <div class="flex flex-col items-center">
+              <div class="border border-amber-dim bg-vault-panel px-4 py-3 text-center min-w-[120px]">
+                <div class="text-xs text-faded font-mono uppercase tracking-wider mb-1">Output</div>
+                <div class="font-mono text-sm text-amber">GitHub PR</div>
+              </div>
+              <div class="text-xs text-faded font-mono mt-2 text-center">→ Live post</div>
+            </div>
+
+          </div>
+
+          <!-- State bar -->
+          <div class="flex items-center gap-2 mt-8 pt-6 border-t border-vault-raised">
+            <span class="text-xs text-faded font-mono uppercase tracking-wider">State:</span>
+            <div class="flex items-center gap-1 flex-wrap">
+              {['pending', 'researching', 'researched', 'writing', 'drafted', 'editing', 'edited', 'optimizing', 'ready', 'publishing', 'published'].map((s) => (
+                <span class="text-xs font-mono text-dust bg-vault-panel px-2 py-0.5 border border-vault-raised">
+                  {s}
+                </span>
+              ))}
+            </div>
+            <span class="text-xs text-faded font-mono ml-1">tracked in DynamoDB</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="mb-16">
+      <DecoSection title="Tech Stack" />
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="border border-vault-raised bg-vault-mid p-6">
+          <h3 class="font-mono text-xs text-faded uppercase tracking-widest mb-4">Infrastructure</h3>
+          <ul class="space-y-2">
+            {[
+              ['AWS Lambda', 'one function per pipeline stage'],
+              ['Amazon SQS', 'queue between every worker'],
+              ['Amazon S3', 'research, draft, and final markdown storage'],
+              ['Amazon DynamoDB', 'task state tracking across async stages'],
+              ['API Gateway', 'SigV4-authenticated entry point'],
+            ].map(([name, desc]) => (
+              <li class="flex gap-3">
+                <span class="font-mono text-sm text-amber shrink-0">{name}</span>
+                <span class="text-sm text-dust">{desc}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="border border-vault-raised bg-vault-mid p-6">
+          <h3 class="font-mono text-xs text-faded uppercase tracking-widest mb-4">Application</h3>
+          <ul class="space-y-2">
+            {[
+              ['Anthropic Claude', 'research, write, edit, SEO, and categorize'],
+              ['OpenAI Codex', 'automated code review on every PR'],
+              ['GitHub App', 'scoped, token-rotated PR creation'],
+              ['Astro', 'static site with content collections'],
+              ['Node.js', 'Lambda runtime and local CLI'],
+              ['MCP Server', 'developer-facing context and tooling layer'],
+            ].map(([name, desc]) => (
+              <li class="flex gap-3">
+                <span class="font-mono text-sm text-amber shrink-0">{name}</span>
+                <span class="text-sm text-dust">{desc}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Repos -->
+    <section class="mb-16">
+      <DecoSection title="The Repos" />
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {[
+          {
+            name: 'richcorabbithole-api',
+            url: 'https://github.com/richcorabbithole/richcorabbithole-api',
+            desc: 'Lambda pipeline, SQS workers, CLI, and serverless infrastructure definition.',
+          },
+          {
+            name: 'richcorabbithole-site',
+            url: 'https://github.com/richcorabbithole/richcorabbithole-site',
+            desc: 'Astro blog — content collections, components, and this page.',
+          },
+          {
+            name: 'richcorabbithole-mcp',
+            url: 'https://github.com/richcorabbithole/richcorabbithole-mcp',
+            desc: 'MCP server exposing pipeline context, worker prompts, and file tools to Claude Code.',
+          },
+        ].map(({ name, url, desc }) => (
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block border border-vault-raised bg-vault-mid p-5 hover:border-amber-dim transition-colors duration-200 group"
+          >
+            <div class="font-mono text-sm text-amber group-hover:text-amber-light transition-colors mb-2">
+              {name}
+            </div>
+            <p class="text-sm text-dust leading-relaxed">{desc}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- Design Decisions -->
+    <section class="mb-16">
+      <DecoSection title="Design Decisions" />
+
+      <div class="space-y-6">
+        {[
+          {
+            title: 'SQS between every stage',
+            body: 'Each worker is decoupled from the next by a queue. A worker failure retries independently without cascading — the task stays at its current stage and can be re-triggered. It also means each Lambda is independently scalable and testable in isolation.',
+          },
+          {
+            title: 'DynamoDB for task state',
+            body: 'Every pipeline stage writes a status update to a single DynamoDB item keyed on a UUID. This gives the CLI a simple polling target and provides an audit trail of timestamps per stage. Config items (like the category registry) live in the same table under a config: key prefix.',
+          },
+          {
+            title: 'Category resolution at research time',
+            body: 'The research worker runs a second Claude call that scores the post against existing categories (0–1) and optionally proposes a new one. A new category only wins if its score beats the best existing score by at least 0.05 — preventing broad categories like "tech" from absorbing everything. Descriptions travel with slugs so the classifier always has accurate context.',
+          },
+          {
+            title: 'GitHub App, not a PAT',
+            body: 'The pipeline uses a GitHub App with Contents and Pull Requests scoped to richcorabbithole-site only. Installation tokens are short-lived (1 hour) and cached with a 5-minute buffer. No personal access tokens, no cross-repo blast radius.',
+          },
+          {
+            title: 'MCP server as the developer layer',
+            body: 'Rather than reading files directly in Claude Code sessions, a local MCP server exposes cached, high-level tools: worker prompts, pipeline info, category schema, blog post listing. This keeps context lean and consistent across sessions without re-reading the same files repeatedly.',
+          },
+        ].map(({ title, body }) => (
+          <div class="border-l-2 border-amber-dim pl-6">
+            <h3 class="font-mono text-sm text-ivory uppercase tracking-wider mb-2">{title}</h3>
+            <p class="text-dust leading-relaxed">{body}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Live Posts -->
+    <section class="mb-16">
+      <DecoSection title="Live Output" />
+
+      <div class="space-y-3">
+        {recentPosts.map((post) => (
+          <a
+            href={`${basePath}blog/${post.slug}/`}
+            class="flex items-center justify-between gap-4 border border-vault-raised bg-vault-mid px-5 py-4 hover:border-amber-dim transition-colors duration-200 group"
+          >
+            <div class="flex items-center gap-4 min-w-0">
+              <CategoryBadge category={post.data.hyperfixation} />
+              <span class="font-body text-cream group-hover:text-amber transition-colors duration-200 truncate">
+                {post.data.title}
+              </span>
+            </div>
+            <time class="text-xs text-faded font-mono shrink-0">{post.data.publishDate}</time>
+          </a>
+        ))}
+      </div>
+    </section>
+
+  </div>
+
+</Layout>
