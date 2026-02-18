@@ -7,7 +7,7 @@ researchDepth: 4
 tags: ["dog-genetics", "german-shepherds", "breed-standards", "recessive-genes", "animal-breeding"]
 socialTitle: "Long Coat German Shepherds: Genetics vs Breed Standards"
 keywords: ["long coat German Shepherd", "German Shepherd genetics", "recessive gene inheritance", "breed standards controversy", "long haired German Shepherd", "German Shepherd coat types", "dog breeding genetics"]
-draft: true
+draft: false
 sources: [
   "https://www.akc.org/dog-breeds/german-shepherd-dog/",
   "https://www.gsdca.org/",
