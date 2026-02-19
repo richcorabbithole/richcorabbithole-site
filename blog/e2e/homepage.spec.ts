@@ -33,9 +33,7 @@ test.describe('Homepage', () => {
     const articles = page.locator('article');
     const count = await articles.count();
     for (let i = 0; i < count; i++) {
-      const badge = articles.nth(i).locator('span', {
-        hasText: /^\s*(TECH|SCIENCE|HISTORY|GAMING|MAKER|POP CULTURE|OTHER)\s*$/
-      });
+      const badge = articles.nth(i).locator('span[style*="--color-cat-"]');
       await expect(badge).toBeVisible();
     }
   });

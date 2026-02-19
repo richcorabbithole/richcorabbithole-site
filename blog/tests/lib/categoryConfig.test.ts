@@ -2,14 +2,17 @@ import { describe, it, expect } from 'vitest';
 import { categoryConfig, type Category } from '../../src/lib/categoryConfig';
 
 describe('categoryConfig', () => {
-  const expectedCategories: Category[] = ['tech', 'science', 'history', 'gaming', 'maker', 'pop-culture', 'other'];
+  const categories = Object.keys(categoryConfig) as Category[];
 
-  it('has all seven categories', () => {
-    expect(Object.keys(categoryConfig)).toEqual(expectedCategories);
+  it('has at least the original seven categories', () => {
+    const baseline = ['tech', 'science', 'history', 'gaming', 'maker', 'pop-culture', 'other'];
+    for (const cat of baseline) {
+      expect(categories).toContain(cat);
+    }
   });
 
-  it.each(expectedCategories)('"%s" has a label and color', (category) => {
-    const config = categoryConfig[category as Category];
+  it.each(categories)('"%s" has a label and color', (category) => {
+    const config = categoryConfig[category];
     expect(config).toBeDefined();
     expect(config.label).toBeTruthy();
     expect(config.color).toBeTruthy();

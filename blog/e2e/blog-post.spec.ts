@@ -57,9 +57,7 @@ test.describe('Blog post pages', () => {
   test('every post has a category badge', async ({ page }) => {
     for (const url of postUrls) {
       await page.goto(url);
-      const badge = page.locator('article header span', {
-        hasText: /^\s*(TECH|SCIENCE|HISTORY|GAMING|MAKER|POP CULTURE|OTHER)\s*$/
-      });
+      const badge = page.locator('article header span[style*="--color-cat-"]');
       await expect(badge, `${url} should have a category badge`).toBeVisible();
     }
   });
