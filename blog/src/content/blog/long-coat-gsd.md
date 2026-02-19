@@ -3,6 +3,7 @@ title: "The Long Coat German Shepherd: When Genetics Creates Beauty That Breeds 
 description: "How a recessive gene creates longer-coated German Shepherds identical to standard dogs in temperament and ability, yet excluded from breed standards for over a century."
 publishDate: "2024-12-28"
 hyperfixation: "science"
+articleType: "knowledge"
 researchDepth: 4
 tags: ["dog-genetics", "german-shepherds", "breed-standards", "recessive-genes", "animal-breeding"]
 socialTitle: "Long Coat German Shepherds: Genetics vs Breed Standards"

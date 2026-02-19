@@ -7,6 +7,7 @@ const blogCollection = defineCollection({
     description: z.string(),
     publishDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
     hyperfixation: z.enum(['tech', 'science', 'history', 'gaming', 'maker', 'pop-culture', 'other']),
+    articleType: z.enum(['knowledge', 'best-of', 'how-to', 'masterclass']).optional(),
     researchDepth: z.number().min(1).max(5),
     tags: z.array(z.string()),
     slug: z.string().optional(),

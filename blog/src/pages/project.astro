@@ -179,7 +179,7 @@ const recentPosts = allPosts
           <h3 class="font-mono text-xs text-faded uppercase tracking-widest mb-4">Application</h3>
           <ul class="space-y-2">
             {[
-              ['Anthropic Claude', 'research, write, edit, SEO, and categorize'],
+              ['Anthropic Claude', 'research, write, edit, SEO, categorize, and infer article type'],
               ['OpenAI Codex', 'automated code review on every PR'],
               ['GitHub App', 'scoped, token-rotated PR creation'],
               ['Astro', 'static site with content collections'],
@@ -254,6 +254,10 @@ const recentPosts = allPosts
           {
             title: 'GitHub App, not a PAT',
             body: 'The pipeline uses a GitHub App with Contents and Pull Requests scoped to richcorabbithole-site only. Installation tokens are short-lived (1 hour) and cached with a 5-minute buffer. No personal access tokens, no cross-repo blast radius.',
+          },
+          {
+            title: 'Article types shape the whole pipeline',
+            body: 'Every post is one of four types: knowledge (understand a concept), best-of (choose from a crowded space), how-to (accomplish a goal), or masterclass (own the topic deeply). If the caller doesn\'t specify a type, the research worker infers it with a lightweight Claude classification call before research begins. The type then adapts both what the research focuses on and how the write worker structures the final post — different length targets, section patterns, and tone guidance for each.',
           },
           {
             title: 'MCP server as the developer layer',

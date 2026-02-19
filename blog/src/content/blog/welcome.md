@@ -3,6 +3,7 @@ title: "Welcome to richcorabbithole"
 description: "An automated blog pipeline where AI-powered Lambda workers research, write, edit, and publish posts as GitHub PRs. Every post is vetted by me before it goes live."
 publishDate: "2026-02-09"
 hyperfixation: "tech"
+articleType: "knowledge"
 researchDepth: 3
 tags: ["introduction", "meta", "blogging"]
 featured: true
