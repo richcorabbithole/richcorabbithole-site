@@ -2,7 +2,7 @@
 title: "Best Inexpensive Hardware for Running Local LLMs"
 description: "Hardware guide for running large language models locally: GPU VRAM requirements, RTX 4060 Ti vs RTX 3090, Mac Studio options, and budget builds for 7B-34B models."
 publishDate: "2026-02-19"
-hyperfixation: "other"
+hyperfixation: "tech"
 articleType: "best-of"
 slug: "local-llm-hardware"
 researchDepth: 4
