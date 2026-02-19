@@ -3,6 +3,7 @@ title: "How Donatello Became the Most Relevant Ninja Turtle"
 description: "From 1980s cartoon character to modern maker movement icon, Donatello's evolution reflects our changing relationship with technology and intelligence."
 publishDate: "2026-02-18"
 hyperfixation: "pop-culture"
+articleType: "knowledge"
 slug: "donatello-relevant-turtle"
 researchDepth: 4
 metaDescription: "How Donatello transformed from 'the machines guy' to TMNT's most culturally relevant turtle, embodying maker movement values and modern tech heroism."
