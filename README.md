@@ -82,7 +82,7 @@ Create a new markdown file in `blog/src/content/blog/` with the following frontm
 title: "Post Title"
 description: "Brief description"
 publishDate: "2026-02-09"
-hyperfixation: "tech" # one of: tech, science, history, gaming, maker, other
+hyperfixation: "tech" # one of: tech, science, history, gaming, maker, pop-culture, other
 researchDepth: 3 # 1-5
 tags: ["tag1", "tag2"]
 draft: false # optional
@@ -98,7 +98,7 @@ Posts are automatically included in the site build using Astro's content collect
 
 ## Deployment
 
-The site deploys automatically to GitHub Pages when changes are pushed to the main branch. The GitHub Actions workflow handles the build and deployment process.
+The site deploys to GitHub Pages when a release is published on GitHub. To ship, create a new release from the `main` branch — the workflow handles the build and deployment automatically. You can also trigger a deploy manually via `workflow_dispatch`.
 
 ## License
 

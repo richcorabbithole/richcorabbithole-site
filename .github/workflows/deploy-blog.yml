@@ -1,11 +1,8 @@
 name: Deploy Blog to GitHub Pages
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'blog/**'
-      - '.github/workflows/deploy-blog.yml'
+  release:
+    types: [published]
   workflow_dispatch:
 
 permissions:
@@ -20,6 +17,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || github.event.release.author.login == 'richcompton1705'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
