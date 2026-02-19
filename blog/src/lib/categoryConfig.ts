@@ -8,4 +8,5 @@ export const categoryConfig: Record<Category, { label: string; color: string }> 
   maker:         { label: 'MAKER',       color: 'var(--color-cat-maker)' },
   'pop-culture': { label: 'POP CULTURE', color: 'var(--color-cat-pop-culture)' },
   other:         { label: 'OTHER',       color: 'var(--color-cat-other)' }
+  'lifestyle': { label: 'LIFESTYLE', color: 'var(--color-cat-lifestyle)' },
 };
